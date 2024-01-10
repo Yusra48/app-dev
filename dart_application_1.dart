@@ -1,16 +1,21 @@
 import 'dart:io';
 
-void main() {
+class user{
+String username;
+String Password;
+user (this.username , this.Password)
+}
+class ExpenseTracker{
   List<String> Expenses = [];
-
-  while (true) {
+  user ? currentuser;
+   
+   void Login or Signup{
     print('\n Expense Tracker');
-    print('1:Add Expenses:');
-    print('2:View Expenses:');
-    print('3:Previous Month Expenses:');
-    print('4:Exit');
+print ('1:Login:');
+print ('2:Signup');
+print ('3:Exit');
 
-    stdout.write('Enter your choice: ');
-    String? choice = stdin.readLineSync();
-  }
+stdout.write('Enter your choice');
+String ? choice =stdin.readLineSync();
+   }
 }
