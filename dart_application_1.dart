@@ -122,3 +122,13 @@ void handleMenuChoice(int choice, CurrentUser currentUser) {
       print('Invalid choice. Please enter a valid option.');
   }
 }
+void addExpense(List<String> expenses) {
+  stdout.write('Enter the expanse amount: ');
+  String? amount = stdin.readLineSync();
+  
+    expanses.add(amount);
+    print('Expanse added successfully!');
+  } else {
+    print('Please enter a valid number.');
+  }
+}
