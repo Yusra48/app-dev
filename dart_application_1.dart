@@ -73,6 +73,7 @@ class CurrentUser extends User {
 
 void main() {
   final currentUser = CurrentUser('', '');
+ 
 
   while (true) {
     printMainMenu();
@@ -87,12 +88,12 @@ void main() {
 }
 
 void printMainMenu() {
-  print('\nWelcome to Expanse Tracker');
+  print('\nWelcome to Expense Tracker');
   print('1: Login');
   print('2: Signup');
-  print('3: Add Expanse');
-  print('4: View Expanse');
-  print('5: Previous Month Expanse');
+  print('3: Add Expense');
+  print('4: View Expense');
+  print('5:Previous Month Expanse');
   print('5: Exit');
   stdout.write('Enter your choice: ');
 }
@@ -108,27 +109,71 @@ void handleMenuChoice(int choice, CurrentUser currentUser) {
       break;
 
     case 3:
-      currentUser.add expanse();
+      addExpense([]);
       break;
 
     case 4:
-      // View Expense logic
+      viewExpense([]);
       break;
 
     case 5:
+      previousMonthExpense([]);
+      break;
+
+    case 6:
       exit(0);
 
     default:
       print('Invalid choice. Please enter a valid option.');
   }
 }
-void addExpense(List<String> expenses) {
-  stdout.write('Enter the expanse amount: ');
-  String? amount = stdin.readLineSync();
-  
-    expanses.add(amount);
-    print('Expanse added successfully!');
+
+void viewExpense(List<String> expenses) {
+  if (expenses.isEmpty) {
+    print('No expenses to display.');
+    stdout.write('\nEnter an expense: ');
+    String? expense = stdin.readLineSync();
+
+    if (expense != null && expense.isNotEmpty) {
+      expenses.add(expense);
+    }
   } else {
-    print('Please enter a valid number.');
+    print('Expenses:');
+    for (int i = 0; i < expenses.length; i++) {
+      print('${i + 1}: ${expenses[i]}');
+    }
+  }
+}
+
+void addExpense(List<double> expenses) {
+  stdout.write('Enter the expense amount: ');
+  String? amountString = stdin.readLineSync();
+
+  if (amountString != null && amountString.isNotEmpty) {
+    try {
+      double amount = double.parse(amountString);
+      expenses.add(amount);
+      print('Expense added successfully!');
+    } catch (e) {
+      print('Invalid amount. Please enter a valid number.');
+    }
+  } else {
+    print('Invalid input. Please enter a valid amount.');
+  }
+}
+
+void previousMonthExpense(List<String> expenses) {
+  if (expenses.isEmpty) {
+    print('No expenses to display.');
+  } else {
+    DateTime now = DateTime.now();
+    DateTime firstDayOfCurrentMonth = DateTime(now.year, now.month, 1);
+    DateTime lastDayOfPreviousMonth =
+        firstDayOfCurrentMonth.subtract(Duration(days: 1));
+
+    print('\nPrevious Month Expense List:');
+    for (int i = 0; i < expenses.length; i++) {
+      print('${i + 1}: ${expenses[i]}');
+    }
   }
 }
