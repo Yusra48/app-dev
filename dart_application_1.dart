@@ -87,11 +87,12 @@ void main() {
 }
 
 void printMainMenu() {
-  print('\nWelcome to Expense Tracker');
+  print('\nWelcome to Expanse Tracker');
   print('1: Login');
   print('2: Signup');
-  print('3: Add Expense');
-  print('4: View Expense');
+  print('3: Add Expanse');
+  print('4: View Expanse');
+  print('5: Previous Month Expanse');
   print('5: Exit');
   stdout.write('Enter your choice: ');
 }
@@ -107,7 +108,7 @@ void handleMenuChoice(int choice, CurrentUser currentUser) {
       break;
 
     case 3:
-      // Add Expense logic
+      currentUser.add expanse();
       break;
 
     case 4:
