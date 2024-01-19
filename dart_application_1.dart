@@ -69,45 +69,33 @@ class CurrentUser extends User {
       return null;
     }
   }
-  void ViewExpense(List<String> expenses) {
-  if (expenses.isEmpty) {
-    print('No expenses to display.');
-  } else {
-    print('\nExpense List:');
-    for (int i = 0; i < expenses.length; i++) {
-      print('${i + 1}: ${expenses[i]}');
+
+  List<double> expenses = [];
+
+  void addExpense() {
+    stdout.write('Enter the expense amount: ');
+    String? amountInput = stdin.readLineSync();
+
+    if (amountInput != null && amountInput.isNotEmpty) {
+      try {
+        double amount = double.parse(amountInput);
+        expenses.add(amount);
+        print('Expense added successfully!');
+      } catch (e) {
+        print('Invalid amount. Please enter a valid number.');
+      }
+    } else {
+      print('Invalid amount. Please enter a valid number.');
     }
   }
-}
 
-void AddExpense(List<String> expenses) {
-  stdout.write('Enter the expanse amount: ');
-  String? amount = stdin.readLineSync();
-
-  if (amount != null && amount.isNotEmpty) {
-    expenses.add(amount);
-    print('Expense added successfully!');
-  } else {
-    print('Invalid amount. Please enter a valid number.');
-  }
-}
-
-void previousMonthExpense(List<String> expenses) {
-  if (expenses.isEmpty) {
-    print('No expenses to display.');
-  } else {
-    DateTime now = DateTime.now();
-    DateTime firstDayOfCurrentMonth = DateTime(now.year, now.month, 1);
-    DateTime lastDayOfPreviousMonth =
-        firstDayOfCurrentMonth.subtract(Duration(days: 1));
-
-    print('\nPrevious Month Expense List:');
-    for (int i = 0; i < expenses.length; i++) {
-      print('${i + 1}: ${expenses[i]}');
+  void viewExpenses() {
+    if (expenses.isNotEmpty) {
+      print('Expenses: $expenses');
+    } else {
+      print('No expenses recorded yet.');
     }
   }
-}
-
 }
 
 void main() {
@@ -131,7 +119,6 @@ void printMainMenu() {
   print('2: Signup');
   print('3: Add Expense');
   print('4: View Expense');
-  print('5:Previous Month Expanse');
   print('5: Exit');
   stdout.write('Enter your choice: ');
 }
@@ -147,18 +134,14 @@ void handleMenuChoice(int choice, CurrentUser currentUser) {
       break;
 
     case 3:
-      currentUser.AddExpense([]);
+      currentUser.addExpense();
       break;
 
     case 4:
-      currentUser.ViewExpense([]);
+      currentUser.viewExpenses();
       break;
 
     case 5:
-      currentUser.previousMonthExpense([]);
-      break;
-
-    case 6:
       exit(0);
 
     default:
