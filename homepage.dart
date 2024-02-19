@@ -1,8 +1,19 @@
+import 'package:practice/aboutview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const HomePage(),
+    );
+  }
 }
 
 class HomePage extends StatelessWidget {
@@ -12,64 +23,32 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        title: const Text("Chats"),
+        backgroundColor: Colors.cyan,
+        title: const Text("Home"),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        padding: const EdgeInsets.all(8),
+      body: SizedBox(
+        width: 500,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            buildChatTile(
-              avatarColor: Colors.pinkAccent,
-              icon: Icons.person,
-              title: "Crazy Us!",
-              subtitle: "Hello! Welcome back",
-            ),
-            buildChatTile(
-              avatarColor: Colors.blueAccent,
-              icon: Icons.person,
-              title: "Flutter Lover",
-              subtitle: "How's your day going?",
-            ),
-            buildChatTile(
-              avatarColor: Colors.greenAccent,
-              icon: Icons.person,
-              title: "Tech Enthusiast",
-              subtitle: "Exciting tech news!",
-            ),
-            buildChatTile(
-              avatarColor: Colors.orangeAccent,
-              icon: Icons.person,
-              title: "Creative Mind",
-              subtitle: "Let's create something amazing!",
+            Image.network(
+                "https://images.pexels.com/photos/355508/pexels-photo-355508.jpeg?cs=srgb&dl=pexels-pixabay-355508.jpg&fm=jpg"),
+            const Text("Home Screen"),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutView(),
+                  ),
+                );
+              },
+              child: const Text("Go to About Screen"),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildChatTile({
-    required Color avatarColor,
-    required IconData icon,
-    required String title,
-    required String subtitle,
-  }) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: avatarColor,
-        child: Icon(icon),
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      ),
-      subtitle: Text(
-        subtitle,
-        style: const TextStyle(color: Colors.black),
-      ),
-      onTap: () {},
     );
   }
 }
