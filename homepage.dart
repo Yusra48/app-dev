@@ -1,53 +1,45 @@
-import 'package:practice/aboutview.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const HomePage(),
-    );
-  }
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
+  addvalue() {
+    count++;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: const Text("Home"),
-      ),
-      body: SizedBox(
-        width: 500,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.network(
-                "https://images.pexels.com/photos/355508/pexels-photo-355508.jpeg?cs=srgb&dl=pexels-pixabay-355508.jpg&fm=jpg"),
-            const Text("Home Screen"),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AboutView(),
-                  ),
-                );
-              },
-              child: const Text("Go to About Screen"),
-            ),
-          ],
+        backgroundColor: Colors.blue,
+        title: const Text(
+          "Home",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
+      ),
+      body: Center(
+        child: Text(
+          "$count",
+          style: const TextStyle(fontSize: 40),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          addvalue();
+          setState(() {});
+        },
       ),
     );
   }
